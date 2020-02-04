@@ -10,7 +10,7 @@ function setUserId({sID, message}) {
 }
 
 function runDisconnectMessage(packet) {
-    debugger;
+    //debugger;
     console.log(packet);
 }
 

@@ -40,11 +40,12 @@ io.on('connection', function(socket) {
     })
 
      // listen for a disconnect event
-    socket.on('disconnect', function() {
-        console.log('a user disconnected');
+    socket.on('disconnect', function(msg) {
+        console.log(msg);
         // listen for a disconnect event
         
         message = `${socket.id} has left the chat!`;
         io.emit('user_disconnect', message);
+        //
     })
 })

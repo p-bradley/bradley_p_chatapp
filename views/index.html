@@ -3,21 +3,28 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Socket IO Chat with Node!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chat App With Node</title>
 	<link rel="stylesheet" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Heebo&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
 	<main id="app">
-		<section class="form-container">
-			<label for="nickname">Your Nickname (optional)</label>
-			<input type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
-
+		<div class="namebox">
+		<label for="nickname">Please Enter Your Name:</label>
+			<div class="whitebox">
+				<input v-model='nickname' type="text" id="nickname" class="nickname" placeholder="Name*">
+			</div>
+		</div>
+		<section class="form-container chatbox">
+			
+			<p v-if="typing" class="typing">{{typing}} is typing...</p>
 			<form>
-				<label for="message">Something to say?</label>
-				<textarea v-model="message" class="message" type="text" autocomplete="off" id="textarea"></textarea>
-				<input @click.prevent="dispatchMessage" type="submit">
+				<label for="message">Message:</label>
+				<textarea v-model="message" class="message" type="text" autocomplete="off" id="textarea" placeholder="Message*"></textarea>
+				<input @click.prevent="dispatchMessage" value="send" type="submit">
 			</form>
 		</section>
 
@@ -28,6 +35,7 @@
 			</ul>
 		</section>
 	</main>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="module" src="js/main_vm.js"></script>
 </body>

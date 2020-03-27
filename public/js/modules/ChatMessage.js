@@ -6,6 +6,7 @@ export default {
 
     template: `
         <p class="new-message" :class="{ 'my-message' : matchedID }">
+            <span id="time">Sent: {{msg.message.sent}}</span>
             <span>{{msg.message.name}} says:</span>
             {{msg.message.content}}
         </p>

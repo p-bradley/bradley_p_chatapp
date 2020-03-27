@@ -8,9 +8,6 @@
         font-size: 5.5vw !important;
         }
 
-        .nickname {
-                font-size: 20px !important;
-            }
 }
 
 //Top Input Box
@@ -18,6 +15,10 @@
 
 	input {
 		width: 60% !important;
+        }
+
+        .form-container form input[type="submit"] {
+                width: 100% !important;
         }
         
         body {
@@ -30,7 +31,18 @@
 
 	body {
         font-size: 4vw !important;
-	}
+        }
+        
+        .form-container form input[type="submit"] {
+                width: 40% !important;
+                margin: 0 auto;
+        }
+
+        .form-container textarea {
+                width: 80% !important;
+                margin: 0 auto;
+                font-size: 14px !important;
+        }
 }
 
 
@@ -48,11 +60,23 @@
         width: 40% !important;
         height: 5vw;
         }
+
+        .form-container form input[type="submit"] {
+                width: 40% !important;
+                margin: 0 auto;
+                height: 50px;
+        }
         
         body {
                 font-size: 3.5vw !important;
                 }
-}
+
+                .form-container textarea {
+                        width: 60% !important;
+                        margin: 0 auto;
+                        font-size: 14px !important;
+                }
+        }
 
 
 @media screen and (min-width:920px) {
@@ -66,7 +90,12 @@
 
 	body {
         font-size: 2.5vw !important;
-	}
+        }
+        
+        .form-container form input[type="submit"] {
+                width: 25% !important;
+                margin: 0 auto;
+        }
 }
 
 @media screen and (min-width:1040px) {
@@ -77,6 +106,11 @@
 	}
 }
 
+@media screen and (min-width:1240px) {
+        .form-container form input[type="submit"] {
+                width: 20% !important;
+                margin: 0 auto;
+}
 
 @media screen and (min-width:1440px) {
 
@@ -90,4 +124,10 @@
         body {
         font-size: 1.5vw !important;
     }
+
+    .form-container form input[type="submit"] {
+        max-width: 14% !important;
+        margin: 0 auto;
+        }
+}
 }

@@ -84,8 +84,10 @@ form {
 	li { padding: 5px 10px;	}
 	li:nth-child(odd) { background: #eee; }
 }
+}
 
-
+.form-container textarea {
+	font-size: 14px;
 }
 
 .form-container, .namebox {
@@ -107,7 +109,7 @@ form {
 	}
 
 .nickname {
-	font-size: 4vw;
+	font-size: 14px;
 }
 	
 }

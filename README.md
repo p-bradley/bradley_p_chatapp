@@ -22,7 +22,7 @@ install npm
 <br>
 run npm start in the terminal
 <br>
-and view in a local host
+and view in localhost:3030
 
 ## TOOLS USED:
 

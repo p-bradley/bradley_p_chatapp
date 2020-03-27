@@ -50,7 +50,7 @@ input, textarea {
 }
 
 textarea { 
-	height: 16vh; 
+	height: 20vh; 
 	font-family: 'Heebo', sans-serif; 
 	font-size: 4vw;
 }
@@ -95,8 +95,8 @@ form {
 
 .namebox {
 
-	padding-top: 4%;
-	padding-bottom: 4%;
+	padding-top: 2%;
+	padding-bottom: 2%;
 	
 
 	input {
@@ -107,7 +107,7 @@ form {
 	}
 
 .nickname {
-	font-size: 4vw;
+	font-size: 14px !important;
 }
 	
 }

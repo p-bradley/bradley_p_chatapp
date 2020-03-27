@@ -23,6 +23,14 @@
         body {
                 font-size: 4.5vw !important;
                 }
+
+
+        .form-container form input[type="submit"] {
+             width: 60% !important;
+             margin: 0 auto !important;
+             margin-top: 20px !important;
+        }
+
 }
 
 
@@ -30,7 +38,18 @@
 
 	body {
         font-size: 4vw !important;
-	}
+        }
+        
+        .form-container textarea {
+                width: 60% !important;
+                margin: 0 auto !important;
+                margin-top: 20px !important;
+                font-size: 14px !important;
+        }
+
+        textarea { 
+                height: 12vh !important; 
+}
 }
 
 
@@ -59,14 +78,24 @@
 
 	body {
         font-size: 3vw !important;
-	}
+        }
+        
+        .form-container form input[type="submit"] {
+                width: 40% !important;
+        }
 }
 
 @media screen and (min-width:1020px) {
 
 	body {
         font-size: 2.5vw !important;
-	}
+        }
+
+        .new-message { 
+                width: 35% !important;
+        }
+        
+        
 }
 
 @media screen and (min-width:1040px) {
@@ -74,7 +103,16 @@
 	input {
         width: 30% !important;
         height: 4vw;
-	}
+        }
+        
+        .form-container textarea {
+
+                width: 30% !important;
+        }
+
+        .form-container form input[type="submit"] {
+                width: 30% !important;
+        }
 }
 
 
@@ -84,10 +122,27 @@
         width: 23% !important;
         height: 3vw;
         padding: 0.2% 0.1% !important;
-        margin-top: 40px !important;
+        margin-top: 20px !important;
         }
         
         body {
         font-size: 1.5vw !important;
     }
+
+    @media screen and (min-width:1640px) {
+
+        .form-container textarea {
+
+                width: 24% !important;
+        }
+
+        .form-container form input[type="submit"] {
+                width: 24% !important;
+        }
+
+        .new-message { 
+                width: 35% !important;
+        }
+
+}
 }

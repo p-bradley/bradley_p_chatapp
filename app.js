@@ -1,10 +1,8 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
 
-//import the socket.io library
 const io = require('socket.io')();
-//instantiate the library right away with () method -> makes it run
-
 const port = process.env.PORT || 3030;
 
 // tell express where our static files are (js, images, css etc)
@@ -18,34 +16,34 @@ const server = app.listen(port, () => {
     console.log(`app is running on port ${port}`);
 });
 
-//this is all of our socket.io messaging functionality
-
-// attach socket.io
-
+// this is all of the socket io functionality
 io.attach(server);
+io.on('connection', function(socket){ //socket is your connection
+    console.log('a  user has connected');
+    
 
 
-io.on('connection', function(socket) {
-    console.log('user connected');
-    socket.emit('connected', { sID: `${socket.id}`, message: 'new connection'});
+    socket.emit('connected', {sID: socket.id, message: " new connection"});
 
-    //listen for an incoming message from a user (socket refers to an individual user)
-    //msg is the incoming message from that user
-    socket.on('chat_message', function(msg) {
-        console.log(msg);
+    socket.on('chat_message', function(msg){
+        console.log(msg); // let's see what the playload is form the client side
+        //tell the conneciton manager (socket.io) to send this messsage to everyone
+        // anyone connected to our chat app will get this message (including the sender)
+        io.emit('new_message', {id: socket.id, message: msg });
 
-        //when we get a new message, send it to everyone so they see it
-        // io is the switchboard operator, making sure everyone who's connected get the message
-        io.emit('new_message', { id: socket.id, message: msg })
+    });
+
+    socket.on('typing', (data) => {
+        io.emit('typing', data);
+    });
+    socket.on('stoptyping', () => {
+        io.emit('stoptyping');
+    });
+
+    //This checks for when a user leaves
+    //To display a console log saying that someone has left
+    socket.on('disconnect', function(){
+        console.log('a user has disconnected');
     })
 
-     // listen for a disconnect event
-    socket.on('disconnect', function(msg) {
-        console.log(msg);
-        // listen for a disconnect event
-        
-        message = `${socket.id} has left the chat!`;
-        io.emit('user_disconnect', message);
-        //
-    })
 })

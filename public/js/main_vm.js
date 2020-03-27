@@ -1,60 +1,78 @@
-// imports always go first - if we're importing anything
 import ChatMessage from "./modules/ChatMessage.js";
-
 const socket = io();
 
-function setUserId({sID, message}) {
-    //debugger;
+function setUserId({sID}){
+
+    console.log(sID);
     vm.socketID = sID;
-    //vm = viewmodel
 }
 
-function runDisconnectMessage(packet) {
-    //debugger;
-    console.log(packet);
+function showDisconnectMessage(){
+    console.log('a user disconnected');
 }
 
-function appendNewMessage(msg) {
-    vm.messages.push(msg);
+function appendMessage(message){
+    vm.messages.push(message);
 }
 
-//this is our main Vue instance
 const vm = new Vue({
-    data: {
+    data:{
+
         socketID: "",
-        messages: [],
         message: "",
-        nickName: ""
- },
+        nickname: "",
+        messages:[],
+        typing: false,
+    },
 
-    methods: {
-        dispatchMessage() {
-            // emit a message event and send the message to the server
-            console.log('handle send message');
-
-            socket.emit('chat_message', { 
-                content: this.message,
-                name: this.nickName || "anonymous"
-                // || is called a double pipe operator or an "or" operator
-                // if this.nickName is set, use it as the value
-                // or just make name "anonymous"
-            })
-
-            this.message = "";
+    watch: {
+        message(value) {
+            value ? socket.emit('typing', this.nickname) : socket.emit('stoptyping');
         }
     },
+    
+      created() {
+         socket.on('typing', (data) => {
+             console.log(data);
+             this.typing = data || 'anonymous';
+             
+         });
+         socket.on('stoptyping', () => {
+             this.typing = false;
+         });
+      },
 
-    components: {
-        newmessage: ChatMessage
+    methods:{
+        dispatchMessage(){
+            console.log('handle emit message');
+
+        //When a chat message is sent, displays what the user types as well as a nickname
+        //If the user doesnt have a nickname, sets it to anonymous
+        if (this.message != "") {
+            socket.emit('chat_message', {
+                content: this.message,
+                name: this.nickname || 'anonymous',
+                sent:  new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit', second:'2-digit'}),
+            });
+
+            //after a message is sent, clear out the text area
+            this.message = "";
+        } 
+        },
+        isTyping() {
+            socket.emit('typing', this.nickname);
+        },
+
+    },
+    mounted(){
+        console.log('vue is done mounting');
     },
 
-    mounted: function() {
-        console.log('mounted');
+    components:{
+        newmessage:ChatMessage
     }
+}).$mount("#app");
 
-}).$mount("#app")
-
-//some event handling -> these events are coming from the server
 socket.addEventListener('connected', setUserId);
-socket.addEventListener('user_disconnect', runDisconnectMessage);
-socket.addEventListener('new_message', appendNewMessage);
+socket.addEventListener('disconnect', showDisconnectMessage);
+socket.addEventListener('new_message', appendMessage);
